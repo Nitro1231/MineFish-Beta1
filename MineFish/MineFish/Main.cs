@@ -6,6 +6,8 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 // Check the more detail about the license at here: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
+// Ver: v1 (3/26/2020-1)
+
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -72,16 +74,15 @@ namespace MineFish {
             if (mineProcess != null) {
                 // Fix the window position if program started with 'In-Game UI' mode.
                 Utils.moveable = false;
+                uiTimer.Enabled = true;
 
                 // Get Minecraft's window size information.
                 GetWindowRect(mineProcess.MainWindowHandle, out info);
 
                 // Set window size and location.
                 SetBounds(info.Right - info.Left - Width - padding - 20, padding, 0, 0, BoundsSpecified.Location);
-                IntPtr hostHandle = mineProcess.MainWindowHandle;
-                IntPtr guestHandle = Handle;
-                SetWindowLong(guestHandle, GWL_STYLE, GetWindowLong(guestHandle, GWL_STYLE) | WS_CHILD);
-                SetParent(guestHandle, hostHandle);
+                SetWindowLong(Handle, GWL_STYLE, GetWindowLong(Handle, GWL_STYLE) | WS_CHILD);
+                SetParent(Handle, mineProcess.MainWindowHandle);
             }
         }
 

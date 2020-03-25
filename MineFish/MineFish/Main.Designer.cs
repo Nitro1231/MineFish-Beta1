@@ -88,7 +88,6 @@
             // 
             // uiTimer
             // 
-            this.uiTimer.Enabled = true;
             this.uiTimer.Interval = 200;
             this.uiTimer.Tick += new System.EventHandler(this.UiTimer_Tick);
             // 
